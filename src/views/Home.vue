@@ -31,15 +31,11 @@
       RoomCard
     },
 
-<<<<<<< HEAD
     sockets: {
       getAllRooms(rooms) {
         this.$store.dispatch("getAllRooms", rooms)
       }
     },
-=======
-    
->>>>>>> b07eb461618fe1e02c15d752a623e5fdc1eca075
 
     created() {
       this.$socket.emit("getAllRooms")
