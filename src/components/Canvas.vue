@@ -32,9 +32,16 @@ export default {
                     
                 },
                 click: function () {
-                    if (this.ximage < this.x && this.yimage < this.y && this.ximage  + 60 >  this.x && this.yimage+ 60 > this.y/(480/146) ) {
+                    if (this.ximage < this.x && this.yimage < this.y && this.ximage  + 60 >  this.x && this.yimage+ 60 > this.y/(480/146) ) {\
+                        var audiosuccess = new Audio('../assets/successAudio.m4a')
+                        audiosuccess.play()
                         this.yimage = Math.floor(Math.random() * (480 - 60))
                         this.ximage = Math.floor(Math.random() * ((999) - 60))                      
+                    } else {
+                        var failedAudio = new Audio('../assets/failedAudio.m4a')
+                        failedAudio.play()
+
+
                     }  
                                      
 
