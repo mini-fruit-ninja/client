@@ -25,9 +25,9 @@ export default {
   sockets: {
     getAllRooms(rooms) {
       this.$store.dispatch("getAllRooms", rooms)
-      .then(() => {
-        this.redirectToLobby(this.findJoinedRoom().id)
-      })
+      // .then(() => {
+      //   this.redirectToLobby(this.findJoinedRoom().id)
+      // })
     },
   },
 

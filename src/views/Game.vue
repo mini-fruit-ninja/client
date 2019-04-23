@@ -33,7 +33,6 @@ export default {
     created() {
       this.$socket.emit('updateScore', this.$store.state.rooms)
       console.log(this.$route.params.roomId, "<== roomId");
-      this.addPoint()
     },
 
     socket: {

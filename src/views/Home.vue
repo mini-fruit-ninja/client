@@ -31,14 +31,14 @@
       RoomCard
     },
 
-    sockets: {
-      getAllRooms(rooms) {
-        this.$store.dispatch("getAllRooms", rooms)
-      }
-    },
+    // sockets: {
+    //   getAllRooms(rooms) {
+    //     this.$store.dispatch("getAllRooms", rooms)
+    //   }
+    // },
 
-    created() {
-      this.$socket.emit("getAllRooms")
-    },
+    // created() {
+    //   this.$socket.emit("getAllRooms")
+    // },
   }
 </script>
