@@ -67,7 +67,7 @@ export default {
 
   watch: {
     numberOfPlayers(val) {
-      if (val === 3) {
+      if (val === 2) {
         this.$router.push({name: 'game', params: {roomId: this.joinedRoomId}})
       }
     }

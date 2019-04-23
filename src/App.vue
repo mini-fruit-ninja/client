@@ -25,6 +25,9 @@ export default {
   sockets: {
     getAllRooms(rooms) {
       this.$store.dispatch("getAllRooms", rooms)
+      .then(() => {
+        this.redirectToLobby(this.findJoinedRoom().id)
+      })
     },
   },
 
@@ -32,18 +35,12 @@ export default {
     this.$socket.emit("getAllRooms")
   },
 
-  mounted() {
-    if (this.findJoinedRoom()) {
-      this.redirectToLobby(this.findJoinedRoom().id)
-    }
-  },
   methods: {
     redirectToLobby(joinedRoomId) {
       this.$router.push({ name: 'lobby', params: { roomId: joinedRoomId } })
     },
 
     findJoinedRoom() {
-      console.log(this.$store.state.rooms.length);
       for (let i = 0; i < this.$store.state.rooms.length; i++) {
         let room = this.$store.state.rooms[i]
         let foundplayer = null

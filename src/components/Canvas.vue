@@ -8,7 +8,7 @@
         <img id="image5" src='../assets/watermelon.png' style="display:none">
         <img id="image6" src='../assets/orange.png' style="display:none">
         <img id="image7" src='../assets/pear.png' style="display:none">
-        <canvas id="canvas" @click="click" @mousemove="updateXY" width="999" height="480"></canvas>
+        <canvas id="canvas" @click="click" @mousemove="updateXY" width="950" height="480"></canvas>
     </div>
 </template>
 <script>
@@ -20,54 +20,54 @@ export default {
                 y: 0,
                 ctx: '',
                 img: [],
-                ximage: Math.floor(Math.random() * (999 - 60)),
+                ximage: Math.floor(Math.random() * (950 - 60)),
                 yimage: Math.floor(Math.random() * (480 - 60))
 
-    } 
+    }
             },
             methods: {
                 updateXY: function (event) {
                     this.x = event.offsetX
                     this.y = event.offsetY
-                    
+
                 },
                 click: function () {
                     if (this.ximage < this.x && this.yimage < this.y && this.ximage  + 60 >  this.x && this.yimage+ 60 > this.y/(480/146) ) {
                         var audiosuccess = new Audio('../assets/successAudio.m4a')
                         audiosuccess.play()
                         this.yimage = Math.floor(Math.random() * (480 - 60))
-                        this.ximage = Math.floor(Math.random() * ((999) - 60))                      
+                        this.ximage = Math.floor(Math.random() * ((950) - 60))
                     } else {
                         var failedAudio = new Audio('../assets/failedAudio.m4a')
                         failedAudio.play()
 
 
-                    }  
+                    }
 
                     console.log(this.x, this.y)
-                                     
+
 
                 },
                 image() {
-                         
+
                     this.ctx = document.getElementById("canvas").getContext("2d")
                     for(let i=0; i<7; i++){
                         this.img.push(document.getElementById(`image${i}`))
                     }
-                }, 
+                },
                 fruit() {
                     this.ctx.drawImage(this.img[2], this.ximage, this.yimage, 60, 60);
-               
+
 
                 }
 
             },
             mounted() {
-              
+
                 this.image()
                 this.fruit()
                 console.log(this.ximage,this.yimage)
-                
+
 
 
             },
@@ -75,14 +75,14 @@ export default {
                 yimage : function(){
                     this.ctx.clearRect(0, 0, document.getElementById('canvas').width, document.getElementById('canvas').height);
                     this.ctx = document.getElementById("canvas").getContext("2d")
-                  
+
                     this.ctx.drawImage(this.img[Math.floor(Math.random()*7)], this.ximage, this.yimage,60,60);
                 }
-                
-            }
-        
 
-    
+            }
+
+
+
 }
 </script>
 
