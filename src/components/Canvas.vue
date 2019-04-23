@@ -16,14 +16,31 @@ export default {
     data()
     {
         return {
+                audiosuccess: new Audio('https://storage.googleapis.com/mri-bucket-ecommerce/successAudio.m4a'),
+                failedAudio :new Audio('https://storage.googleapis.com/mri-bucket-ecommerce/failedAudio.m4a'),
                 x: 0,
                 y: 0,
                 ctx: '',
                 img: [],
-                ximage: Math.floor(Math.random() * (950 - 60)),
-                yimage: Math.floor(Math.random() * (480 - 60))
-
-    }
+                ximage: 468,
+                yimage: 210
+    } 
+            },
+            sockets: {
+                fruitClicked(fruitAxis) {
+                        this.audiosuccess.play()
+                        this.yimage = fruitAxis.yimage
+                        this.ximage = fruitAxis.ximage
+                },
+                fruitNotClicked() {
+                        this.failedAudio.play()
+                },
+                onChange(rand) {
+                    console.log(rand);
+                    this.ctx.clearRect(0, 0, document.getElementById('canvas').width, document.getElementById('canvas').height);
+                    this.ctx = document.getElementById("canvas").getContext("2d")
+                    this.ctx.drawImage(this.img[rand], this.ximage, this.yimage,60,60);
+                }
             },
             methods: {
                 updateXY: function (event) {
@@ -32,15 +49,10 @@ export default {
 
                 },
                 click: function () {
-                    if (this.ximage < this.x && this.yimage < this.y && this.ximage  + 60 >  this.x && this.yimage+ 60 > this.y/(480/146) ) {
-                        var audiosuccess = new Audio('../assets/successAudio.m4a')
-                        audiosuccess.play()
-                        this.yimage = Math.floor(Math.random() * (480 - 60))
-                        this.ximage = Math.floor(Math.random() * ((950) - 60))
+                    if (this.ximage < this.x && this.yimage < this.y && this.ximage  + 60 >  this.x && this.yimage+ 60 > this.y ) {
+                        this.$socket.emit('fruitClicked');
                     } else {
-                        var failedAudio = new Audio('../assets/failedAudio.m4a')
-                        failedAudio.play()
-
+                        this.$socket.emit('fruitNotClicked');
 
                     }
 
@@ -48,37 +60,27 @@ export default {
 
 
                 },
-                image() {
-
+                image() { 
                     this.ctx = document.getElementById("canvas").getContext("2d")
                     for(let i=0; i<7; i++){
                         this.img.push(document.getElementById(`image${i}`))
                     }
                 },
                 fruit() {
-                    this.ctx.drawImage(this.img[2], this.ximage, this.yimage, 60, 60);
-
-
+                    this.ctx.drawImage(this.img[0], this.ximage, this.yimage, 60, 60);
                 }
 
             },
             mounted() {
-
                 this.image()
-                this.fruit()
-                console.log(this.ximage,this.yimage)
-
-
-
+                setTimeout(() => {
+                    this.fruit()
+                },200)  
             },
             watch:{
                 yimage : function(){
-                    this.ctx.clearRect(0, 0, document.getElementById('canvas').width, document.getElementById('canvas').height);
-                    this.ctx = document.getElementById("canvas").getContext("2d")
-
-                    this.ctx.drawImage(this.img[Math.floor(Math.random()*7)], this.ximage, this.yimage,60,60);
-                }
-
+                    this.$socket.emit('onChange');
+                }    
             }
 
 
