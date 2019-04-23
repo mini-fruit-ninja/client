@@ -25,6 +25,11 @@ export default new Router({
       path: '/lobby/:roomId',
       name: 'lobby',
       component: () => import('./views/Lobby.vue')
+    },
+    {
+      path: '/game/:roomId',
+      name: 'game',
+      component: () => import('./views/Game.vue')
     }
   ]
 })

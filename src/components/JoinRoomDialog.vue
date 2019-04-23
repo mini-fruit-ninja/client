@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" persistent max-width="300px">
       <template v-slot:activator="{ on }">
-        <v-btn 
+        <v-btn
           flat color="green" v-on="on">
           Join
         </v-btn>
@@ -55,9 +55,9 @@ import { join } from 'path';
     }),
 
     sockets: {
-      joinARoom(joinedRoom) {
-        this.$store.dispatch("joinARoom", joinedRoom)
-      }
+      createARoom(objRoom) {
+        this.$store.dispatch("createARoom", objRoom)
+      },
     },
 
     methods: {
@@ -71,12 +71,11 @@ import { join } from 'path';
           }
         }
         this.$socket.emit("joinARoom", which)
-        
+
         localStorage.setItem("id", which.player.id)
         localStorage.setItem("name", which.player.name)
-        localStorage.setItem("joinedRoomId", which.roomId)
 
-        this.$emit("joined")
+        this.$store.dispatch("setJoinedStatus")
 
         this.clearForms()
         this.dialog = !this.dialog

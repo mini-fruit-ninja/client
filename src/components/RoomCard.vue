@@ -8,11 +8,10 @@
     </v-card-title>
 
     <v-card-actions>
-      <v-btn v-if="$store.state.joined && $store.state.joinedRoom.id == room.id" dark color="green" @click="exitFromARoom">
+<!--       <v-btn v-if="$store.state.joined && $store.state.joinedRoom.id == room.id" dark color="green" @click="exitFromARoom">
         Joined
-      </v-btn>
+      </v-btn> -->
       <JoinRoomDialog
-        v-else
         :room="room"
         @joined="joined"
       />

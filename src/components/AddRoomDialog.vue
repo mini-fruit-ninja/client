@@ -44,12 +44,6 @@
       ]
     }),
 
-    sockets: {
-      createARoom(objRoom) {
-        this.$store.dispatch("createARoom", objRoom)
-      }
-    },
-
     methods: {
       createAroom() {
         let newRoom = {
@@ -59,6 +53,7 @@
           players: [],
           createdAt: new Date
         }
+
         this.$socket.emit("createARoom", newRoom)
         this.clearForms()
         this.dialog = !this.dialog

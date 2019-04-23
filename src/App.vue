@@ -18,22 +18,47 @@ export default {
   },
   data () {
     return {
-      //
+
     }
   },
+
+  sockets: {
+    getAllRooms(rooms) {
+      this.$store.dispatch("getAllRooms", rooms)
+    },
+  },
+
   created() {
     this.$socket.emit("getAllRooms")
-    if(this.$store.state.rooms.length === 0) {
-      localStorage.clear()
-    }
-    else if (this.$store.state.joinedRoomId !== null ) {
-      this.redirectToLobby(this.$store.state.joinedRoomId)
+  },
+
+  mounted() {
+    if (this.findJoinedRoom()) {
+      this.redirectToLobby(this.findJoinedRoom().id)
     }
   },
   methods: {
     redirectToLobby(joinedRoomId) {
-      this.$router.push({name: 'lobby', params: { roomId: joinedRoomId }})
+      this.$router.push({ name: 'lobby', params: { roomId: joinedRoomId } })
+    },
+
+    findJoinedRoom() {
+      console.log(this.$store.state.rooms.length);
+      for (let i = 0; i < this.$store.state.rooms.length; i++) {
+        let room = this.$store.state.rooms[i]
+        let foundplayer = null
+        for (let j = 0; j < room.players.length; j++) {
+          let player = room.players[j]
+
+          if (player.id === localStorage.getItem("id")) {
+            return {
+              id: room.id,
+              index: i
+            }
+          }
+        }
+      }
     }
-  },
+  }
 }
 </script>

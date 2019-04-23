@@ -34,9 +34,6 @@
     sockets: {
       getAllRooms(rooms) {
         this.$store.dispatch("getAllRooms", rooms)
-      },
-      joinARoom(joinedRoom) {
-        this.$store.dispatch("joinARoom", joinedRoom)
       }
     },
 

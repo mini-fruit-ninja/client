@@ -7,31 +7,36 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     rooms: [],
-    joinedRoom: null,
-    joinedRoomId: localStorage.getItem("joinedRoomId"),
     joined: false
   },
   mutations: {
-    addRoom(state, objRoom) {
-      state.rooms.unshift(objRoom)
+    addRoom(state, payload) {
+      state.rooms.unshift(payload)
     },
-    setRooms(state, roomList) {
-      state.rooms = roomList
+    setRooms(state, payload) {
+      state.rooms = payload
     },
-    setJoinedRoom(state, objRoom) {
-      state.joinedRoom = objRoom
+    setJoinedRoom(state, payload) {
+      state.joinedRoom = payload
+    },
+    setJoinedStatus(state) {
+      state.joined != state.joined
     }
   },
   actions: {
-    getAllRooms(context, roomList) {
-      context.commit("setRooms", roomList)
+    getAllRooms(context, rooms) {
+      context.commit("setRooms", rooms)
     },
     createARoom(context, objRoom) {
       context.commit("addRoom", objRoom)
     },
     joinARoom(context, objRoom) {
       context.commit("setJoinedRoom", objRoom)
+    },
+    setJoinedStatus(context, objRoom) {
+      context.commit("setJoinedStatus")
     }
+
     // getAllRooms (context) {
     //   db.collection('rooms')
     //     .orderBy('createdAt', 'asc')
@@ -57,6 +62,23 @@ export default new Vuex.Store({
     //   .catch(function(error) {
     //       console.error("Error adding document: ", error);
     //   });
+    // },
+
+    // joinARoom(context, which) {
+    //   db.collection("rooms").doc(`${which.roomId}`)
+    //   .set(updatedTask)
+    //   .then(function () {
+    //     Swal.fire({
+    //       position: 'top-end',
+    //       type: 'success',
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     })
+    //     context.dispatch('getAllTasks')
+    //   })
+    //   .catch(function (error) {
+    //     console.error('Error updating document: ', error)
+    //   })
     // }
   }
 })

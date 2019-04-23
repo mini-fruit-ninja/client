@@ -7,7 +7,9 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
-      <AddRoomDialog/>
+      <AddRoomDialog
+        v-if="$route.path !== '/lobby' && $route.path !== '/game'"
+      />
     </v-toolbar-items>
   </v-toolbar>
 </template>
