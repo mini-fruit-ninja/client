@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<template>
   <v-container>
     <v-layout
@@ -13,3 +14,19 @@
     </v-layout>
   </v-container>
 </template>
+=======
+<template>
+    <Canvas />
+</template>
+
+<script>
+import Canvas from '../components/Canvas.vue'
+export default {
+    components: { Canvas }
+}
+</script>
+
+<style>
+
+</style>
+>>>>>>> b07eb461618fe1e02c15d752a623e5fdc1eca075

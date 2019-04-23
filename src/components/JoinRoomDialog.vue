@@ -54,12 +54,15 @@ import { join } from 'path';
       ],
     }),
 
+<<<<<<< HEAD
     sockets: {
       createARoom(objRoom) {
         this.$store.dispatch("createARoom", objRoom)
       },
     },
 
+=======
+>>>>>>> b07eb461618fe1e02c15d752a623e5fdc1eca075
     methods: {
       joinARoom() {
         let which = {

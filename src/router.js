@@ -5,6 +5,7 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
+<<<<<<< HEAD
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -33,3 +34,35 @@ export default new Router({
     }
   ]
 })
+=======
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [{
+            path: '/',
+            name: 'home',
+            component: Home
+        },
+        {
+            path: '/about',
+            name: 'about',
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () =>
+                import ( /* webpackChunkName: "about" */ './views/About.vue')
+        },
+        {
+            path: '/lobby/:roomId',
+            name: 'lobby',
+            component: () =>
+                import ('./views/Lobby.vue')
+        },
+        {
+            path: '/game',
+            name: 'game',
+            component: () =>
+                import ('./views/Game.vue')
+        }
+    ]
+})
+>>>>>>> b07eb461618fe1e02c15d752a623e5fdc1eca075

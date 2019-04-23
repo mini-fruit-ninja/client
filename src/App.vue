@@ -21,6 +21,7 @@ export default {
 
     }
   },
+<<<<<<< HEAD
 
   sockets: {
     getAllRooms(rooms) {
@@ -28,6 +29,16 @@ export default {
     },
   },
 
+=======
+  sockets: {
+      getAllRooms(rooms) {
+        this.$store.dispatch("getAllRooms", rooms)
+      },
+      joinARoom(joinedRoom) {
+        this.$store.dispatch("joinARoom", joinedRoom)
+      }
+    },
+>>>>>>> b07eb461618fe1e02c15d752a623e5fdc1eca075
   created() {
     this.$socket.emit("getAllRooms")
   },
