@@ -14,7 +14,12 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="roomNameInput" label="Room name" required></v-text-field>
+                <v-text-field
+                  v-model="roomNameInput"
+                  :rules="roomNameInputRules"
+                  label="Room name"
+                  required>
+                </v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -29,16 +34,37 @@
 </template>
 
 <script>
+  import randomstring from 'randomstring'
   export default {
     data: () => ({
       dialog: false,
-      roomNameInput: ""
+      roomNameInput: "Cihuy",
+      roomNameInputRules: [
+        v => !!v || 'Cannot be empty'
+      ]
     }),
+
+    sockets: {
+      createARoom(objRoom) {
+        this.$store.dispatch("createARoom", objRoom)
+      }
+    },
 
     methods: {
       createAroom() {
-        this.$store.dispatch("createARoom", this.roomNameInput)
+        let newRoom = {
+          id: randomstring.generate(10),
+          name: this.roomNameInput,
+          status: "pending",
+          players: [],
+          createdAt: new Date
+        }
+        this.$socket.emit("createARoom", newRoom)
+        this.clearForms()
         this.dialog = !this.dialog
+      },
+      clearForms() {
+        this.roomNameInput = ""
       }
     }
   }

@@ -26,12 +26,22 @@
   import RoomCard from '../components/RoomCard'
 
   export default {
-    mounted() {
-      this.$store.dispatch("getAllRooms")
-    },
     components: {
       HelloWorld,
       RoomCard
-    }
+    },
+
+    sockets: {
+      getAllRooms(rooms) {
+        this.$store.dispatch("getAllRooms", rooms)
+      },
+      joinARoom(joinedRoom) {
+        this.$store.dispatch("joinARoom", joinedRoom)
+      }
+    },
+
+    created() {
+      this.$socket.emit("getAllRooms")
+    },
   }
 </script>
