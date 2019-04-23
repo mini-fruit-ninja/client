@@ -21,6 +21,14 @@ export default {
       //
     }
   },
+  sockets: {
+      getAllRooms(rooms) {
+        this.$store.dispatch("getAllRooms", rooms)
+      },
+      joinARoom(joinedRoom) {
+        this.$store.dispatch("joinARoom", joinedRoom)
+      }
+    },
   created() {
     this.$socket.emit("getAllRooms")
     if(this.$store.state.rooms.length === 0) {

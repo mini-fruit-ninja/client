@@ -54,12 +54,6 @@ import { join } from 'path';
       ],
     }),
 
-    sockets: {
-      joinARoom(joinedRoom) {
-        this.$store.dispatch("joinARoom", joinedRoom)
-      }
-    },
-
     methods: {
       joinARoom() {
         let which = {
