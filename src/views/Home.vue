@@ -31,14 +31,7 @@
       RoomCard
     },
 
-    sockets: {
-      getAllRooms(rooms) {
-        this.$store.dispatch("getAllRooms", rooms)
-      },
-      joinARoom(joinedRoom) {
-        this.$store.dispatch("joinARoom", joinedRoom)
-      }
-    },
+    
 
     created() {
       this.$socket.emit("getAllRooms")

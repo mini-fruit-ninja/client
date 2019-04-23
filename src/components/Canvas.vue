@@ -32,7 +32,7 @@ export default {
                     
                 },
                 click: function () {
-                    if (this.ximage < this.x && this.yimage < this.y && this.ximage  + 60 >  this.x && this.yimage+ 60 > this.y/(480/146) ) {\
+                    if (this.ximage < this.x && this.yimage < this.y && this.ximage  + 60 >  this.x && this.yimage+ 60 > this.y/(480/146) ) {
                         var audiosuccess = new Audio('../assets/successAudio.m4a')
                         audiosuccess.play()
                         this.yimage = Math.floor(Math.random() * (480 - 60))
@@ -43,6 +43,8 @@ export default {
 
 
                     }  
+
+                    console.log(this.x, this.y)
                                      
 
                 },
