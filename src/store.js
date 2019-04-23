@@ -19,7 +19,7 @@ export default new Vuex.Store({
             state.rooms = roomList
         },
         setJoinedRoom(state, objRoom) {
-            console.log('masuk')
+            console.log(objRoom)
             state.joinedRoom = objRoom
         }
     },
